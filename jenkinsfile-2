@@ -5,7 +5,37 @@ pipeline {
 
     stage('Initialization') {
       steps {
-        echo 'setting environment variables...'
+        echo 'Setting environment variables...'
+      }
+    }
+
+    stage('Validation') {
+      steps {
+        echo 'Validating Jenkins ChangeLog file...'
+      }
+    }
+
+    stage('Qualification') {
+      steps {
+        echo 'Executing Quality Checks...'
+      }
+    }
+
+    stage('Pending') {
+      steps {
+        echo 'Checking for Pending changes...'
+      }
+    }
+
+    stage('Bookmarking') {
+      steps {
+        echo 'Applying a tag to bookmark rollback point...'
+      }
+    }
+
+    stage('Apply') {
+      steps {
+        echo 'Applying changes to Database...'
       }
     }
   }
