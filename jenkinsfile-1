@@ -1,0 +1,9 @@
+pipeline {
+  agent any
+
+  stages {
+    stage('Check') {
+      echo 'Performing systax checking..'
+    }
+  }
+}
