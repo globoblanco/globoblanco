@@ -2,10 +2,10 @@ pipeline {
   agent any
 
   stages {
-  ### Set environment variables on server side
+
     stage('Initialization') {
       steps {
-        echo 'setting environment variables.'
+        echo 'setting environment variables...'
       }
     }
   }
