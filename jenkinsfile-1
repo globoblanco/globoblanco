@@ -3,7 +3,9 @@ pipeline {
 
   stages {
     stage('Check') {
-      echo 'Performing systax checking..'
+      steps {
+        echo 'Performing systax checking..'
+      }
     }
   }
 }
