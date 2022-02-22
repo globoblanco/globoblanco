@@ -7,8 +7,8 @@ pipeline {
 
   // Define environment variables needed for the pipeline
   environment {
-    USERNAME = credentials('postgres')
-    USER_PASSWORD = credentials('postgres')
+    USER_NAME = "postgres"
+    USER_PASSWORD = "postgres"
   }
 
   // Define pipeline stages
