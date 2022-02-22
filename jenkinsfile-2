@@ -7,7 +7,7 @@ pipeline {
 
   // Define environment variables needed for the pipeline
   environment {
-    POSTGRES_CREDENTIALS = credentials('POSTGRES_CREDENTIALS')
+    POSTGRES_CREDS = credentials('POSTGRES_CREDENTIALS')
   }
 
   // Define pipeline stages
@@ -37,14 +37,14 @@ pipeline {
     stage('Qualification') {
       steps {
         echo 'Executing Quality Checks...'
-	//sh 'liquibase checks run --username=$POSTGRES_CREDENTIALS_USR --password=$POSTGRES_CREDENTIAL__PSW'
+	//sh 'liquibase checks run --username=$POSTGRES_CREDS_USR --password=$POSTGRES_CREDS_PSW'
       }
     }
 
     stage('Pending') {
       steps {
         echo 'Checking for Pending changes...'
-	// sh 'liquibase status --username=$POSTGRES_CREDENTIALS_USR --password=$POSTGRES_CREDENTIAL__PSW'
+	// sh 'liquibase status --username=$POSTGRES_CREDS_USR --password=$POSTGRES_CREDS_PSW'
       }
     }
 
