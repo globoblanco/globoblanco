@@ -1,13 +1,29 @@
 pipeline {
+
+  // Define agent used
   agent {
     docker { image 'liquibase/liquibase:4.4.2' }
   }
 
+  // Define environment variables needed for the pipeline
+  environment {
+    USERNAME = credentials('postgres')
+    USER_PASSWORD = credentials('postgres')
+  }
+
+  // Define pipeline stages
   stages {
 
     stage('Verification') {
       steps {
+        sh 'printenv'
         sh 'liquibase --version'
+      }
+    }
+
+    stage('Information') {
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
       }
     }
 
