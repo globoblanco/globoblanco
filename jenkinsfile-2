@@ -24,13 +24,7 @@ pipeline {
 
     stage('Information') {
       steps {
-        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-      }
-    }
-
-    stage('Initialization') {
-      steps {
-        echo 'Setting environment variables...'
+        echo 'Running $env.BUILD_ID on $env.JENKINS_URL'
       }
     }
 
@@ -62,6 +56,12 @@ pipeline {
       steps {
         echo 'Applying changes to Database...'
       }
+    }
+  }
+
+  post {
+    failure {
+      mail to: globoblanco@hotmail.com, subject: 'Build failed'
     }
   }
 }
