@@ -61,7 +61,7 @@ pipeline {
 
   post {
     failure {
-      mail to: globoblanco@hotmail.com, subject: 'Build failed'
+      sh 'echo "Build failed :-("'
     }
   }
 }
