@@ -44,6 +44,7 @@ pipeline {
     stage('Pending') {
       steps {
         echo 'Checking for Pending changes...'
+	sh 'liquibase status --username=$POSTGRES_CREDENTIALS_USR --password=$POSTGRES_CREDENTIAL__PSW'
       }
     }
 
