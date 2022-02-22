@@ -30,7 +30,7 @@ pipeline {
     stage('Validation') {
       steps {
         echo 'Validating Jenkins ChangeLog file...'
-	sh 'liquibase --log-level=FINE validate'
+	sh 'liquibase --logLevel=FINE validate'
       }
     }
 
