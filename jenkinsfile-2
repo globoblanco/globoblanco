@@ -30,19 +30,21 @@ pipeline {
     stage('Validation') {
       steps {
         echo 'Validating Jenkins ChangeLog file...'
+	sh 'liquibase validate'
       }
     }
 
     stage('Qualification') {
       steps {
         echo 'Executing Quality Checks...'
+	//sh 'liquibase checks run --username=$POSTGRES_CREDENTIALS_USR --password=$POSTGRES_CREDENTIAL__PSW'
       }
     }
 
     stage('Pending') {
       steps {
         echo 'Checking for Pending changes...'
-	sh 'liquibase status --username=$POSTGRES_CREDENTIALS_USR --password=$POSTGRES_CREDENTIAL__PSW'
+	// sh 'liquibase status --username=$POSTGRES_CREDENTIALS_USR --password=$POSTGRES_CREDENTIAL__PSW'
       }
     }
 
