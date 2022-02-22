@@ -17,14 +17,15 @@ pipeline {
 
     stage('Verification') {
       steps {
-        sh 'printenv'
+        //sh 'printenv'
         sh 'liquibase --version'
       }
     }
 
     stage('Information') {
       steps {
-        echo 'Running $env.BUILD_ID on $env.JENKINS_URL'
+        echo 'Running ${env.BUILD_ID} on ${env.JENKINS_URL}'
+	echo 'Build information at: ${env.RUN_DISPLAY)URL}'
       }
     }
 
