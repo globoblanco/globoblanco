@@ -1,76 +1,43 @@
+#!/usr/bin/env groovy
+// Liquibase declarative pipeline
+//
+//
 pipeline {
-
-  // Define agent used
-  agent {
-    docker { image 'liquibase/liquibase:4.8' }
-  }
-
-  // Define environment variables needed for the pipeline
+agent any
   environment {
-    POSTGRES_CREDS = credentials('POSTGRES_CREDENTIALS')
-    LIQUIBASE_COMMAND_USERNAME = '$LIQUIBASE_COMMAND_USERNAME'
-    LIQUIBASE_COMMAND_PASSWORD = '$LIQUIBASE_COMMAND_PASSWORD'
-    LIQUIBASE_COMMAND_URL = '$LIQUIBASE_COMMAND_URL'
-    LIQUIBASE_PRO_LICENSE_KEY = '$LIQUIBASE_PRO_LICENSE_KEY'
-    LIQUIBASE_COMMAND_CHANGELOG_FILE = '$LIQUIBASE_COMMAND_CHANGELOG_FILE'
+    PATH="/usr/local/bin:$PATH"
+    ENVIRONMENT_STEP="${params.'Pipeline Step'}"
   }
-
-  // Define pipeline stages
   stages {
 
-    stage('Verification') {
+    stage ('Precheck docker version') {
+		steps {
+			sh '''
+        docker --version
+			'''
+		} // steps
+	} // stage 'precheck'
+  
+  stage ('running liquibase with docker') {
       steps {
-        //sh 'printenv'
-	sh 'echo This is a test'
-	sh 'echo $LIQUIBASE_PRO_LICENSE_KEY'
-        sh 'liquibase --version'
-      }
-    }
-
-    stage('Information') {
-      steps {
-        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-	echo "Build information at: ${env.RUN_DISPLAY_URL}"
-      }
-    }
-
-    stage('Validation') {
-      steps {
-        echo 'Validating Jenkins ChangeLog file...'
-	sh 'liquibase --logLevel=INFO validate'
-      }
-    }
-
-    stage('Qualification') {
-      steps {
-        echo 'Executing Quality Checks...'
-	sh 'liquibase checks run '
-      }
-    }
-
-    stage('Pending') {
-      steps {
-        echo 'Checking for Pending changes...'
-	sh 'liquibase status --verbose '
-      }
-    }
-
-    stage('Bookmarking') {
-      steps {
-        echo 'Applying a tag to bookmark rollback point...'
-      }
-    }
-
-    stage('Apply') {
-      steps {
-        echo 'Applying changes to Database...'
-      }
-    }
-  }
-
-  post {
-    failure {
-      sh 'echo "Build failed :-("'
-    }
-  }
-}
+        // checkout Liquibase project from CLO repo
+        sh '''	
+	# setting Environment Variables
+	. /home/test/env_vars.sh &>/dev/null
+	
+	# running an update
+        docker run \
+	--env LIQUIBASE_COMMAND_USERNAME \
+	--env LIQUIBASE_COMMAND_PASSWORD \
+	--env LIQUIBASE_COMMAND_URL \
+	--env LIQUIBASE_PRO_LICENSE_KEY \
+	--env LIQUIBASE_COMMAND_CHANGELOG_FILE \
+	--rm \
+	-v "${cwd}"/changelogs:/liquibase/changelog:z \
+	liquibase/liquibase:latest --log-level=info update
+          '''
+      } // steps for checkout stages
+    } // stage 'checkout'
+    
+  } // stages
+}  // pipeline
