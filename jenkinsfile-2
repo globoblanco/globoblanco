@@ -21,6 +21,7 @@ pipeline {
     stage('Verification') {
       steps {
         //sh 'printenv'
+	sh 'echo This is a test'
 	sh 'echo $LIQUIBASE_PRO_LICENSE_KEY'
         sh 'liquibase --version'
       }
