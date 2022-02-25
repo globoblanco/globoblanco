@@ -2,12 +2,17 @@ pipeline {
 
   // Define agent used
   agent {
-    docker { image 'liquibase/liquibase:4.4.2' }
+    docker { image 'liquibase/liquibase:4.8' }
   }
 
   // Define environment variables needed for the pipeline
   environment {
     POSTGRES_CREDS = credentials('POSTGRES_CREDENTIALS')
+    LIQUIBASE_COMMAND_USERNAME = '$LIQUIBASE_COMMAND_USERNAME'
+    LIQUIBASE_COMMAND_PASSWORD = '$LIQUIBASE_COMMAND_PASSWORD'
+    LIQUIBASE_COMMAND_URL = '$LIQUIBASE_COMMAND_URL'
+    LIQUIBASE_PRO_LICENSE_KEY = '$LIQUIBASE_PRO_LICENSE_KEY'
+    LIQUIBASE_COMMAND_CHANGELOG_FILE = '$LIQUIBASE_COMMAND_CHANGELOG_FILE'
   }
 
   // Define pipeline stages
@@ -37,14 +42,14 @@ pipeline {
     stage('Qualification') {
       steps {
         echo 'Executing Quality Checks...'
-	//sh 'liquibase checks run --username=$POSTGRES_CREDS_USR --password=$POSTGRES_CREDS_PSW'
+	sh 'liquibase checks run '
       }
     }
 
     stage('Pending') {
       steps {
         echo 'Checking for Pending changes...'
-	// sh 'liquibase status --username=$POSTGRES_CREDS_USR --password=$POSTGRES_CREDS_PSW'
+	sh 'liquibase status --verbose '
       }
     }
 
