@@ -3,6 +3,9 @@ pipeline {
   // Define agent used
   agent {
     docker { image 'liquibase/liquibase:4.8' }
+    environment {
+      BUILD_ID = "${env.BUILD_ID}"
+    }
   }
 
   // Define environment variables needed for the pipeline
@@ -57,7 +60,7 @@ pipeline {
     stage ('Bookmarking') {
       steps {
         echo "Creating bookmak tag..."
-	sh 'liquibase tag version${env.BUILD_ID}'
+	sh 'liquibase tag version_' + BUILD_ID
       }
     }
   }
