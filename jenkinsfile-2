@@ -5,7 +5,7 @@ pipeline {
     docker { image 'liquibase/liquibase:4.8' }
   }
   environment {
-    BUILD_ID = "${env.BUILD_ID}"
+    BUILD_ID = '${env.BUILD_ID}'
   }
 
   // Define environment variables needed for the pipeline
