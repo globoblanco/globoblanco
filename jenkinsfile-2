@@ -36,6 +36,14 @@ pipeline {
 	sh 'liquibase checks run'
       }
     }
+
+    // Pending
+    stage ('Pending') {
+      steps {
+        echo "Checking for Pending changes..."
+	sh 'liquibase status --verbose'
+      }
+    }
   }
 
 }
