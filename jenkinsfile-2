@@ -58,7 +58,7 @@ pipeline {
     stage ('Bookmarking') {
       steps {
         echo "Creating bookmak tag..."
-	sh 'liquibase tag version_BUILD_ID'
+	sh "liquibase tag version_${env.BUILD_ID}"
       }
     }
   }
