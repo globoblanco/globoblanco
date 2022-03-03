@@ -44,6 +44,21 @@ pipeline {
 	sh 'liquibase status --verbose'
       }
     }
+
+    // Verify changeLogFile
+    stage ('Verify ChangeLog') {
+      steps {
+        echo "Verifying changeLogFile..."
+        sh 'liquibase updateSQL'
+      }
+    }
+  }
+
+  // Post steps
+  post {
+    failure {
+      echo 'Build failed :-('
+    }
   }
 
 }

@@ -29,5 +29,18 @@
 	        DROP TABLE student
 	    </sql>
 	</changeSet>
+	<changeSet autho="Gabriel Lobo-Blanco" id="4">
+		<createTable tableName="my_table">
+			<column name="my_table_id" type="uuid">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="dept" type="varchar(50)" >
+				<constraints nullable="false" />
+			</column>
+			<column name="created_ts" type="timestamp" >
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
 </databaseChangeLog>
 
