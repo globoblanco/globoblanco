@@ -24,8 +24,8 @@ pipeline {
     // Display information
     stage ('Information') {
       steps {
-        sh 'echo Running ${env.BUILD_ID} on ${env.JENKINS_URL}'
-	sh 'echo Build information at: ${env.RUN_DISPLAY_URL}'
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+	echo "Build information at: ${env.RUN_DISPLAY_URL}"
       }
     }
   }
