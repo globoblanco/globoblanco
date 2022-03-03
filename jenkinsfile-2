@@ -15,8 +15,10 @@ pipeline {
     
     // Verification Step
     stage ('Verification') {
-     sh 'echo ${LIQUIBASE_PRO_LICENSE_KEY}'
-     sh 'liquibase --version'
+      steps {
+        sh 'echo ${LIQUIBASE_PRO_LICENSE_KEY}'
+        sh 'liquibase --version'
+      }
     }
   }
 
