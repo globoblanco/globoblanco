@@ -4,13 +4,11 @@ pipeline {
   agent {
     docker { image 'liquibase/liquibase:4.8' }
   }
-  environment {
-    BUILD_ID = '${env.BUILD_ID}'
-  }
 
   // Define environment variables needed for the pipeline
   environment {
     POSTGRES_CREDS = credentials('POSTGRES_CREDENTIALS')
+    BUILD_ID = '${env.BUILD_ID}'
   }
 
   // Define pipeline stages
