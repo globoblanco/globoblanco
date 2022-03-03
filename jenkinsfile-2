@@ -17,7 +17,7 @@ pipeline {
     // Verification Step
     stage ('Verification') {
       steps {
-        sh 'echo ${LIQUIBASE_PRO_LICENSE_KEY}'
+        //sh 'echo ${LIQUIBASE_PRO_LICENSE_KEY}'
         sh 'liquibase --version'
       }
     }
@@ -58,7 +58,7 @@ pipeline {
     stage ('Bookmarking') {
       steps {
         echo "Creating bookmak tag..."
-	sh 'liquibase tag version_' + BUILD_ID
+	sh 'liquibase tag version_${BUILD_ID}'
       }
     }
   }
