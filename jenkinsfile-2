@@ -15,10 +15,18 @@ pipeline {
   stages {
     
     // Verification Step
-    stage ('Verification') {
+    //stage ('Verification') {
+    //  steps {
+    //    //sh 'echo ${LIQUIBASE_PRO_LICENSE_KEY}'
+    //    sh 'liquibase --version'
+    //  }
+    //}
+
+    // ChangeLog Validation
+    stage ('changeLogFile Validation') {
       steps {
-        //sh 'echo ${LIQUIBASE_PRO_LICENSE_KEY}'
-        sh 'liquibase --version'
+        echo "Validating changeLogFile syntax..."
+	sh 'liquibase --changeLogFile=db.changelog-master.xml validate'
       }
     }
 

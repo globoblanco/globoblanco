@@ -32,8 +32,6 @@ Users of this repository shall check-in their changeLogFile's under the "Freatur
 
 
 
-
-
 - 👋 Hi, I’m @globoblanco
 - 👀 I’m interested in ...
 - 🌱 I’m currently learning ...
