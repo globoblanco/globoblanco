@@ -11,7 +11,7 @@
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd"
                    changeLogId="8eb8eab3-8e35-4a65-b536-cc19a871085e" >
 
-	<preConditions onFaile="WARN">
+	<preConditions onFail="WARN">
 		<or>
 			<dbms type="postgresql" />
 		</or>
