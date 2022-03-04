@@ -32,9 +32,7 @@
 	</changeSet>
 	<changeSet author="Gabriel Lobo-Blanco" id="4">
 		<createTable tableName="my_table">
-			<column name="my_table_id" type="uuid">
-				<constraints primaryKey="true" />
-			</column>
+			<column name="my_table_id" type="uuid" />
 			<column name="dept" type="varchar(50)" >
 				<constraints nullable="false" />
 			</column>
@@ -42,6 +40,10 @@
 				<constraints nullable="false" />
 			</column>
 		</createTable>
+		<addPrimaryKey
+			tableName="my_table"
+			columnNames="my_table_id"
+			constraintName="my_table_pk" />
 	</changeSet>
 </databaseChangeLog>
 
