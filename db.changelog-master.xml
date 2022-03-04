@@ -11,7 +11,7 @@
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd"
                    changeLogId="8eb8eab3-8e35-4a65-b536-cc19a871085e" >
 
-	<include file="db.changelog-preconditions.xml" relativeToChangelogFile="true"/>
+	<include file="db.changelog-preconditions.xml" relativeToChangelogFile="true" />
 	<include file="changelogs/2022-03/db.changelog-master.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
 
