@@ -42,7 +42,7 @@ pipeline {
     stage ('Pending') {
       steps {
         echo "Checking for Pending changes..."
-	sh 'liquibase status --verbose'
+	sh 'liquibase --changeLogFile=db.changelog-master.xml status --verbose'
       }
     }
 
@@ -50,7 +50,7 @@ pipeline {
     stage ('Verify ChangeLog') {
       steps {
         echo "Verifying changeLogFile..."
-        sh 'liquibase updateSQL'
+        sh 'liquibase  --changeLogFile=db.changelog-master.xml updateSQL'
       }
     }
 
@@ -58,7 +58,7 @@ pipeline {
     stage ('Bookmarking') {
       steps {
         echo "Creating bookmak tag..."
-	sh "liquibase --logLevel=DEBUG tag version_${env.BUILD_ID}"
+	sh "liquibase --logLevel=DEBUG --changeLogFile=db.changelog-master.xml tag version_${env.BUILD_ID}"
       }
     }
   }
