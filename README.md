@@ -6,7 +6,7 @@ You can click the Preview link to take a look at your changes.
 This repository is used only for testing various implementeation of LiquiBase scripts using Jenkins Pipelines
 
 The repository structure is shown below:
-
+```
 .
 |-- README.md
 |-- changelogs
@@ -20,6 +20,8 @@ The repository structure is shown below:
 |-- db.changelog-postconditions.xml
 |-- db.changelog-preconditions.xml
 `-- jenkinsfile-2
+
+```
 
 Users of this repository shall check-in their changeLogFile's under the "Freatures" folder of the corresponding version being used. Files shall not be checked into prior versions. In addition, each developer shall have his/her own changeLogFile for the feature or fix currently assigned to him/her.
 
