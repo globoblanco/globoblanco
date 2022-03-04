@@ -36,7 +36,8 @@
 			<column name="dept" type="varchar(50)" >
 				<constraints nullable="false" />
 			</column>
-			<column name="created_ts" type="timestamp" >
+			<column name="created_ts" type="TIMESTAMP(6)" 
+				defaultValueDate="CURRENT_TIMESTAMP(6)" >
 				<constraints nullable="false" />
 			</column>
 		</createTable>
