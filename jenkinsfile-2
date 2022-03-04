@@ -66,7 +66,7 @@ pipeline {
     stage ('Bookmarking') {
       steps {
         echo "Creating bookmak tag..."
-	sh "liquibase --logLevel=DEBUG --changeLogFile=db.changelog-master.xml tag version_${env.BUILD_ID}"
+	sh "liquibase --logLevel=info --changeLogFile=db.changelog-master.xml tag version_${env.BUILD_ID}"
       }
     }
   }
