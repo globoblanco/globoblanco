@@ -72,7 +72,7 @@ pipeline {
 
     // Apply changes
     stage ('Migrate') {
-      step {
+      steps {
         echo "Applying changes to database..."
         sh 'liquibase --changeLogFile=db.changelog-master.xml update'
       }
