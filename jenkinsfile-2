@@ -69,6 +69,12 @@ pipeline {
 	sh 'liquibase --logLevel=info --changeLogFile=db.changelog-master.xml tag version_$BUILD_ID'
       }
     }
+
+    // Apply changes
+    stage ('Migrate') {
+      echo "Applying changes to database..."
+      sh 'liquibase --changeLogFile=db.changelog-master.xml update'
+    }
   }
 
   // Post steps
