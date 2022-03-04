@@ -75,6 +75,8 @@ pipeline {
   post {
     failure {
       echo 'Build failed :-('
+      echo 'Trying to rollback changes...'
+      sh 'liquibase --changeLogFile=db.changelog-master.xml rollback version_$BUILD_ID'
     }
   }
 
