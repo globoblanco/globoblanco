@@ -34,7 +34,7 @@ pipeline {
     stage ('Qualification') {
       steps {
         echo "Executing Quality Checks..."
-	sh 'liquibase checks run'
+	sh 'liquibase --changeLogFile=db.changelog-master.xml checks run'
       }
     }
 
