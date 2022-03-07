@@ -48,14 +48,14 @@
 	<changeSet id="6" author="Gabriel Lobo-Blanco">
 		<comment>Adding permissions to table</comment>
 		<sql dbms="postgresql" >
-			GRANT ALL ON ALL ON TABLES IN SCHEMA customers TO snap_liquibase;
+			GRANT ALL ON ALL TABLES IN SCHEMA customers TO snap_liquibase;
 		</sql>
 	</changeSet>
 
 	<changeSet id="7" author="Gabriel Lobo-Blanco">
 		<comment>Adding permissions to SEQUENCES</comment>
 		<sql dbms="postgresql" >
-			GRANT ALL ON ALL ON SEQUENCES IN SCHEMA customers TO snap_liquibase;
+			GRANT ALL ON ALL SEQUENCES IN SCHEMA customers TO snap_liquibase;
 		</sql>
 	</changeSet>
 
