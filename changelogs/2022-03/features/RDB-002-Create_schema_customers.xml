@@ -13,48 +13,48 @@
 
 	<changeSet id="1" author="Gabriel Lobo-Blanco">
 		<comment>Create liquibase role</comment>
-		<sql dbms="postgresql" endDelimeter=";" >
+		<sql dbms="postgresql" >
 			CREATE ROLE snap_liquibase WITH NOLOGIN NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
 		</sql>
 	</changeSet>
 
 	<changeSet id="2" author="Gabriel Lobo-Blanco">
 		<comment>Create liquibase user</comment>
-		<sql dbms="postgresql" endDelimeter=";" >
+		<sql dbms="postgresql" >
 			CREATE USER liquibase_user WITH PASSWORD '[user_pass'] LOGIN NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
 		</sql>
 	</changeSet>
 
 	<changeSet id="3" author="Gabriel Lobo-Blanco">
-		<sql dbms="postgresql" endDelimeter=";" >
+		<sql dbms="postgresql" >
 			GRANT snap_liquibase TO liquibase_user;
 		</sql>
 	</changeSet>
 
 	<changeSet id="4" author="Gabriel Lobo-Blanco">
 		<comment>Create schema</comment>
-		<sql dbms="postgresql" endDelimeter=";" >
+		<sql dbms="postgresql" >
 			CREATE SCHEMA customers AUTHORIZATION postgres;
 		</sql>
 	</changeSet>
 
 	<changeSet id="5" author="Gabriel Lobo-Blanco">
 		<comment>Adding permissions to schema</comment>
-		<sql dbms="postgresql" endDelimeter=";" >
+		<sql dbms="postgresql" >
 			GRANT ALL ON SCHEMA customers TO snap_liquibase;
 		</sql>
 	</changeSet>
 
 	<changeSet id="6" author="Gabriel Lobo-Blanco">
 		<comment>Adding permissions to table</comment>
-		<sql dbms="postgresql" endDelimeter=";" >
+		<sql dbms="postgresql" >
 			GRANT ALL ON ALL ON TABLES IN SCHEMA customers TO snap_liquibase;
 		</sql>
 	</changeSet>
 
 	<changeSet id="7" author="Gabriel Lobo-Blanco">
 		<comment>Adding permissions to SEQUENCES</comment>
-		<sql dbms="postgresql" endDelimeter=";" >
+		<sql dbms="postgresql" >
 			GRANT ALL ON ALL ON SEQUENCES IN SCHEMA customers TO snap_liquibase;
 		</sql>
 	</changeSet>
