@@ -61,14 +61,14 @@
 
 	<changeSet id="8" author="Gabriel Lobo-Blanco">
 		<comment>Create service user</comment>
-		<sql dbms="postgresql" endDelimeter=";" >
+		<sql dbms="postgresql" >
 			CREATE USER customers_svc WITH PASSWORD '[user_pass]' LOGIN NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
 		</sql>
 	</changeSet>
 
 	<changeSet id="9" author="Gabriel Lobo-Blanco">
 		<comment>Grant basic permissions to service user</comment>
-		<sql dbms="postgresql" endDelimeter=";" >
+		<sql dbms="postgresql" >
 			GRANT ALL ON SCHEMA customers TO POSTGRES;
 			GRANT ALL ON SCHEMA customers TO snap_liquibase;
 			GRANT USAGE ON SCHEMA customers TO customers_svc;
