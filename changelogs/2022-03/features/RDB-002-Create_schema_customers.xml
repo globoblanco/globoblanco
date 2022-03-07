@@ -1,0 +1,80 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" 
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro" 
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext 
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd 
+                   http://www.liquibase.org/xml/ns/pro 
+                   http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd 
+                   http://www.liquibase.org/xml/ns/dbchangelog 
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd"
+                   changeLogId="8eb8eab3-8e35-4a65-b536-cc19a871085e" >
+
+	<changeSet id="1" author="Gabriel Lobo-Blanco">
+		<comment>Create liquibase role</comment>
+		<sql dbms="postgresql" endDelimeter=";" >
+			CREATE ROLE snap_liquibase WITH NOLOGIN NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
+		</sql>
+	</changeSet>
+
+	<changeSet id="2" author="Gabriel Lobo-Blanco">
+		<comment>Create liquibase user</comment>
+		<sql dbms="postgresql" endDelimeter=";" >
+			CREATE USER liquibase_user WITH PASSWORD '[user_pass'] LOGIN NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
+		</sql>
+	</changeSet>
+
+	<changeSet id="3" author="Gabriel Lobo-Blanco">
+		<sql dbms="postgresql" endDelimeter=";" >
+			GRANT snap_liquibase TO liquibase_user;
+		</sql>
+	</changeSet>
+
+	<changeSet id="4" author="Gabriel Lobo-Blanco">
+		<comment>Create schema</comment>
+		<sql dbms="postgresql" endDelimeter=";" >
+			CREATE SCHEMA customers AUTHORIZATION postgres;
+		</sql>
+	</changeSet>
+
+	<changeSet id="5" author="Gabriel Lobo-Blanco">
+		<comment>Adding permissions to schema</comment>
+		<sql dbms="postgresql" endDelimeter=";" >
+			GRANT ALL ON SCHEMA customers TO snap_liquibase;
+		</sql>
+	</changeSet>
+
+	<changeSet id="6" author="Gabriel Lobo-Blanco">
+		<comment>Adding permissions to table</comment>
+		<sql dbms="postgresql" endDelimeter=";" >
+			GRANT ALL ON ALL ON TABLES IN SCHEMA customers TO snap_liquibase;
+		</sql>
+	</changeSet>
+
+	<changeSet id="7" author="Gabriel Lobo-Blanco">
+		<comment>Adding permissions to SEQUENCES</comment>
+		<sql dbms="postgresql" endDelimeter=";" >
+			GRANT ALL ON ALL ON SEQUENCES IN SCHEMA customers TO snap_liquibase;
+		</sql>
+	</changeSet>
+
+	<changeSet id="8" author="Gabriel Lobo-Blanco">
+		<comment>Create service user</comment>
+		<sql dbms="postgresql" endDelimeter=";" >
+			CREATE USER customers_svc WITH PASSWORD '[user_pass]' LOGIN NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
+		</sql>
+	</changeSet>
+
+	<changeSet id="9" author="Gabriel Lobo-Blanco">
+		<comment>Grant basic permissions to service user</comment>
+		<sql dbms="postgresql" endDelimeter=";" >
+			GRANT ALL ON SCHEMA customers TO POSTGRES;
+			GRANT ALL ON SCHEMA customers TO snap_liquibase;
+			GRANT USAGE ON SCHEMA customers TO customers_svc;
+			GRATN SELECT ON ALL TABLES IN SCHEMA customers TO customers_svc;
+			GRANT ALL ON ALL SEQUENCES IN SCHEMA customers TO customers_svc;
+		</sql>
+	</changeSet>
+</databaseChangeLog>
+

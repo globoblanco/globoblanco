@@ -12,5 +12,6 @@
                    changeLogId="8eb8eab3-8e35-4a65-b536-cc19a871085e" >
 
 	<include file="features/RDB-001-Create_test_table.xml" relativeToChangelogFile="true"/>
+	<include file="features/RDB-002-Create_schema_customers.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
 
