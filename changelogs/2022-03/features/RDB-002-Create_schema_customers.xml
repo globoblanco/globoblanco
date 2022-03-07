@@ -72,7 +72,7 @@
 			GRANT ALL ON SCHEMA customers TO POSTGRES;
 			GRANT ALL ON SCHEMA customers TO snap_liquibase;
 			GRANT USAGE ON SCHEMA customers TO customers_svc;
-			GRATN SELECT ON ALL TABLES IN SCHEMA customers TO customers_svc;
+			GRANT SELECT ON ALL TABLES IN SCHEMA customers TO customers_svc;
 			GRANT ALL ON ALL SEQUENCES IN SCHEMA customers TO customers_svc;
 		</sql>
 	</changeSet>
