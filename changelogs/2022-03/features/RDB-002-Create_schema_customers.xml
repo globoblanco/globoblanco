@@ -21,7 +21,7 @@
 	<changeSet id="2" author="Gabriel Lobo-Blanco">
 		<comment>Create liquibase user</comment>
 		<sql dbms="postgresql" >
-			CREATE USER liquibase_user WITH PASSWORD '[user_pass'] LOGIN NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
+			CREATE USER liquibase_user WITH PASSWORD 'user_pass' LOGIN NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
 		</sql>
 	</changeSet>
 
@@ -62,7 +62,7 @@
 	<changeSet id="8" author="Gabriel Lobo-Blanco">
 		<comment>Create service user</comment>
 		<sql dbms="postgresql" >
-			CREATE USER customers_svc WITH PASSWORD '[user_pass]' LOGIN NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
+			CREATE USER customers_svc WITH PASSWORD 'user_pass' LOGIN NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
 		</sql>
 	</changeSet>
 
